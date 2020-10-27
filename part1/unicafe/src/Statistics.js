@@ -2,6 +2,14 @@ import React from "react";
 
 export default function Statistics({ good, neutral, bad }) {
   const all = good + neutral + bad;
+  if (good === 0 && neutral === 0 && bad === 0) {
+    return (
+      <>
+        <h2>statistics</h2>
+        <p>No feedback given</p>
+      </>
+    );
+  }
   return (
     <>
       <h2>statistics</h2>
