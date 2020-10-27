@@ -14,12 +14,16 @@ export default function Statistics({ good, neutral, bad }) {
   return (
     <>
       <h2>statistics</h2>
-      <Statistic text="good" value={good} />
-      <Statistic text="neutral" value={neutral} />
-      <Statistic text="bad" value={bad} />
-      <Statistic text="all" value={all} />
-      <Statistic text="average" value={(good - bad) / all} />
-      <Statistic text="positive" value={`${(good / all) * 100} %`} />
+      <table>
+        <tbody>
+          <Statistic text="good" value={good} />
+          <Statistic text="neutral" value={neutral} />
+          <Statistic text="bad" value={bad} />
+          <Statistic text="all" value={all} />
+          <Statistic text="average" value={(good - bad) / all} />
+          <Statistic text="positive" value={`${(good / all) * 100} %`} />
+        </tbody>
+      </table>
     </>
   );
 }
