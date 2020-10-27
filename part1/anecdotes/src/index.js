@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+
+import Anecdote from "./Anecdote";
 import Button from "./Button";
 
 const App = ({ anecdotes }) => {
@@ -15,16 +17,19 @@ const App = ({ anecdotes }) => {
   const increasePoints = (index) => {
     const copy = [...points];
     copy[index]++;
-    console.log(copy);
+    // console.log(copy);
     setPoints(copy);
   };
 
+  const max = points.indexOf(Math.max(...points));
+
   return (
     <>
-      <p>{anecdotes[selected]}</p>
+      <Anecdote heading="Anecdote of the day" text={anecdotes[selected]} />
       <p>has {points[selected]} votes</p>
       <Button text="vote" handleClick={() => increasePoints(selected)} />
       <Button text="next anecdote" handleClick={changeAnecdote} />
+      <Anecdote heading="Anecdote with most votes" text={anecdotes[max]} />
     </>
   );
 };
