@@ -17,6 +17,13 @@ const App = () => {
       .then((response) => setPersons(response.data));
   }, []);
 
+  useEffect(() => {
+    axios
+      .post("http://localhost:3001/persons", persons[persons.length - 1])
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  }, [persons]);
+
   const addName = (event) => {
     event.preventDefault();
     if (persons.find((person) => person.name === newName)) {
@@ -57,7 +64,7 @@ const App = () => {
       <h2>Numbers</h2>
       <Persons
         persons={persons.filter((person) =>
-          person.name.toLowerCase().includes(searchTerm)
+          person.name.toLowerCase().includes(searchTerm.toLowerCase())
         )}
       />
     </div>
