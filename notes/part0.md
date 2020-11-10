@@ -14,4 +14,4 @@ The chain of events caused by opening the page can be represented using [sequenc
 
 **JavaScript libraries**: In the initial days (when traditional web apps are predominant) jQuery is used to manipulate DOM. Later BackboneJS is used to develop SPA. After that Google's Anglular became defacto. But as version 2 is not backwards compatible with version 1 developers moved away from it.
 
-**Full stack web development**: Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the architecture of a web application as a kind of stack of layers.`
+**Full stack web development**: Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the architecture of a web application as a kind of stack of layers.
