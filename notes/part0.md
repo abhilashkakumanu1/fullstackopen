@@ -10,7 +10,7 @@ The chain of events caused by opening the page can be represented using [sequenc
 
     AJAX is the term that is introduced to describe a new revolutionary approach that enabled the fetching of content to web pages using JavaScript included within the HTML, without the need to rerender the page. Prior to the AJAX era, all web pages worked like the traditional web application. 
 
-4. **Single page app**: SPA-style websites don't fetch all of their pages separately from the server, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser. 
+3. **Single page app**: SPA-style websites don't fetch all of their pages separately from the server, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser. 
 
 **JavaScript libraries**: In the initial days (when traditional web apps are predominant) jQuery is used to manipulate DOM. Later BackboneJS is used to develop SPA. After that Google's Anglular became defacto. But as version 2 is not backwards compatible with version 1 developers moved away from it.
 
