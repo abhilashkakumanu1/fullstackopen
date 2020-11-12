@@ -40,7 +40,7 @@ Creating a new resource for storing a note is done by making an HTTP POST reques
 
 json-server requires all data to be sent in JSON format. What this means in practice is that the data must be a correctly formatted string, and that the request must contain the Content-Type request header with the value application/json. If the data we sent in the POST request was a JavaScript object, axios automatically sets the appropriate application/json value for the Content-Type header.
 
-**Not all axios requests should be kept in `useEffect` hook**. We can make a POST request on button click.
+**Not all axios requests are needed to be kept in `useEffect` hook**. We can make a POST request on button click.
 
 PUT replaces the entire note where as PATCH only change some of the note's properties. 
 
