@@ -55,13 +55,25 @@ app.delete("/api/persons/:id", (req, res) => {
 });
 
 app.post("/api/persons", (req, res) => {
-  const note = req.body;
+  const body = req.body;
 
   const generateId = () => {
     return Math.floor(Math.random() * 100000);
   };
 
-  note.id = generateId();
+  if (!body.name) {
+    return res.status(400).json({ error: "name is missing" });
+  } else if (!body.number) {
+    return res.status(400).json({ error: "number is missing" });
+  } else if (notes.find((note) => note.name === body.name)) {
+    return res.status(400).json({ error: "name must be unique" });
+  }
+
+  const note = {
+    ...body,
+    id: generateId(),
+  };
+
   notes = notes.concat(note);
 
   res.json(note);
