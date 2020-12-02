@@ -34,6 +34,17 @@ app.get("/api/info", (req, res) => {
   );
 });
 
+app.get("/api/persons/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const note = notes.find((note) => note.id === id);
+
+  if (note) {
+    res.json(note);
+  } else {
+    res.status(404).end();
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server started and listening to port ${PORT}`);
