@@ -22,3 +22,5 @@ We have to check for the case when there is no note of the requested id. Server 
 **HTTP resquest types**: The HTTP standard talks about two properties related to request types, **safety** and **idempotence**. Safety means that the executing request must not cause any side effects in the server. By side-effects we mean that the state of the database must not change as a result of the request, and the response must only return data that already exists on the server. All HTTP requests except POST should be idempotent. This means that if a request has side-effects, then the result should be same regardless of how many times the request is sent.
 
 **Middleware**: Middleware are functions that can be used for handling request and response objects. The json-parser we used earlier takes the raw data from the requests that's stored in the request object, parses it into a JavaScript object and assigns it to the request object as a new property body.
+
+## Deploying app to internet

@@ -17,21 +17,22 @@ const App = () => {
       .then((response) => setPersons(response.data));
   }, []);
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:3001/persons", persons[persons.length - 1])
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
-  }, [persons]);
-
   const addName = (event) => {
     event.preventDefault();
     if (persons.find((person) => person.name === newName)) {
       alert(`${newName} is already added to the phonebook`);
     } else {
-      setPersons([...persons, { name: newName, number: newNumber }]);
-      setNewName("");
-      setNewNumber("");
+      axios
+        .post("http://localhost:3001/persons", {
+          name: newName,
+          number: newNumber,
+        })
+        .then((res) => {
+          setPersons([...persons, res.data]);
+          setNewName("");
+          setNewNumber("");
+        })
+        .catch((err) => console.log(err));
     }
   };
 
