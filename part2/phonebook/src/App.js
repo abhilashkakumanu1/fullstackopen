@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import "./index.css";
 
 import Filter from "./Filter";
 import PersonForm from "./PersonForm";
 import Persons from "./Persons";
+import Notification from "./Notification";
 
 import services from "./services/phonebook";
 
@@ -11,6 +13,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [notification, setNotification] = useState({ type: "", message: null });
 
   useEffect(() => {
     services.getAll().then((response) => setPersons(response));
@@ -23,6 +26,7 @@ const App = () => {
       (person) => person.name.toLowerCase() === newName.toLowerCase()
     )[0];
 
+    // Update existing user number
     if (matchingPerson) {
       if (
         window.confirm(
@@ -41,16 +45,34 @@ const App = () => {
             setPersons(updatedPersons);
             setNewName("");
             setNewNumber("");
+
+            setNotification({
+              type: "success",
+              message: `Updated ${newName}'s number`,
+            });
+            setTimeout(() => {
+              setNotification({ type: "", message: null });
+            }, 5000);
           })
           .catch((err) => console.log(err));
       }
-    } else {
+    }
+    // Adding new user
+    else {
       services
         .create({ name: newName, number: newNumber })
         .then((res) => {
           setPersons([...persons, res]);
           setNewName("");
           setNewNumber("");
+
+          setNotification({
+            type: "success",
+            message: `Added ${newName}`,
+          });
+          setTimeout(() => {
+            setNotification({ type: "", message: null });
+          }, 5000);
         })
         .catch((err) => console.log(err));
     }
@@ -80,6 +102,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification type={notification.type} message={notification.message} />
       <Filter {...{ searchTerm, handleSearchChange }} />
       <h2>add a new contact</h2>
       <PersonForm
