@@ -38,7 +38,14 @@ const App = () => {
       <div>
         find countries <input value={searchCountry} onChange={handleChange} />
       </div>
-      <CountryList {...{ countries, error, handleClick, detailedView }} />
+      <CountryList
+        {...{
+          countries,
+          error,
+          handleClick,
+          detailedView,
+        }}
+      />
     </>
   );
 };

@@ -2,7 +2,13 @@ import React from "react";
 
 import Country from "./Country";
 
-const CountryList = ({ countries, error, handleClick, detailedView }) => {
+const CountryList = ({
+  countries,
+  error,
+  handleClick,
+  detailedView,
+  getWeatherData,
+}) => {
   if (error) {
     return <p>Enter a valid country name</p>;
   }
