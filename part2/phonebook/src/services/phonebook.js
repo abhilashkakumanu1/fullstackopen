@@ -14,10 +14,14 @@ const deletePerson = (id) => {
   return axios.delete(`${url}/${id}`);
 };
 
+const update = (id, newObject) => {
+  return axios.put(`${url}/${id}`, newObject).then((res) => res.data);
+};
 const services = {
   getAll,
   create,
   deletePerson,
+  update,
 };
 
 export default services;
