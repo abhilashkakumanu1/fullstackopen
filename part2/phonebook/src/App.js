@@ -44,6 +44,15 @@ const App = () => {
     setSearchTerm(event.target.value);
   };
 
+  const onDelete = (id) => {
+    const person = persons.filter((person) => person.id === id)[0];
+    if (window.confirm(`Delete ${person.name} ?`)) {
+      services.deletePerson(id).then(() => {
+        setPersons(persons.filter((person) => person.id !== id));
+      });
+    }
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -63,6 +72,7 @@ const App = () => {
         persons={persons.filter((person) =>
           person.name.toLowerCase().includes(searchTerm.toLowerCase())
         )}
+        onDelete={onDelete}
       />
     </div>
   );
