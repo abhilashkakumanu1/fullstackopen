@@ -6,6 +6,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static("build"));
 
 // Creating a custom token for POST object
 morgan.token("post-obj", function getObj(req) {
