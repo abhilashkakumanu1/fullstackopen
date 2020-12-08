@@ -1,8 +1,11 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
+
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 // Creating a custom token for POST object
 morgan.token("post-obj", function getObj(req) {
@@ -91,7 +94,7 @@ app.post("/api/persons", (req, res) => {
   res.json(note);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server started and listening to port ${PORT}`);
 });
