@@ -17,21 +17,21 @@ mongoose.connect(url, {
   useCreateIndex: true,
 });
 
-const noteSchema = new Schema({ name: String, number: String });
-const Note = mongoose.model("Note", noteSchema);
+const personSchema = new Schema({ name: String, number: String });
+const Person = mongoose.model("Person", personSchema);
 
 if (process.argv.length === 3) {
   console.log("phonebook:");
-  Note.find({}).then((res) => {
-    res.forEach((note) => console.log(`${note.name} ${note.number}`));
+  Person.find({}).then((res) => {
+    res.forEach((person) => console.log(`${person.name} ${person.number}`));
     mongoose.connection.close();
   });
 } else {
-  const note = new Note({
+  const person = new Person({
     name: process.argv[3],
     number: process.argv[4],
   });
-  note.save().then((res) => {
+  person.save().then((res) => {
     console.log(`added ${res.name} ${res.number} to phonebook`);
     mongoose.connection.close();
   });

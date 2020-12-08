@@ -19,7 +19,7 @@ app.use(
   )
 );
 
-let notes = [
+let persons = [
   {
     id: 1,
     name: "Arto Hellas",
@@ -43,21 +43,21 @@ let notes = [
 ];
 
 app.get("/api/persons", (req, res) => {
-  res.json(notes);
+  res.json(persons);
 });
 
 app.get("/api/info", (req, res) => {
   res.send(
-    `<p>Phonebook has info for ${notes.length} people</p><p>${new Date()}</p>`
+    `<p>Phonebook has info for ${persons.length} people</p><p>${new Date()}</p>`
   );
 });
 
 app.get("/api/persons/:id", (req, res) => {
   const id = Number(req.params.id);
-  const note = notes.find((note) => note.id === id);
+  const person = persons.find((person) => person.id === id);
 
-  if (note) {
-    res.json(note);
+  if (person) {
+    res.json(person);
   } else {
     res.status(404).end();
   }
@@ -65,7 +65,7 @@ app.get("/api/persons/:id", (req, res) => {
 
 app.delete("/api/persons/:id", (req, res) => {
   const id = Number(req.params.id);
-  notes = notes.filter((note) => note.id !== id);
+  persons = persons.filter((person) => person.id !== id);
 
   res.status(204).end();
 });
@@ -81,18 +81,18 @@ app.post("/api/persons", (req, res) => {
     return res.status(400).json({ error: "name is missing" });
   } else if (!body.number) {
     return res.status(400).json({ error: "number is missing" });
-  } else if (notes.find((note) => note.name === body.name)) {
+  } else if (persons.find((person) => person.name === body.name)) {
     return res.status(400).json({ error: "name must be unique" });
   }
 
-  const note = {
+  const person = {
     ...body,
     id: generateId(),
   };
 
-  notes = notes.concat(note);
+  persons = persons.concat(person);
 
-  res.json(note);
+  res.json(person);
 });
 
 const PORT = process.env.PORT || 3001;
