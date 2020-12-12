@@ -62,15 +62,20 @@ app.post("/api/persons", (req, res) => {
   } else if (!body.number) {
     return res.status(400).json({ error: "number is missing" });
   }
-  //  else if (persons.find((person) => person.name === body.name)) {
-  //   return res.status(400).json({ error: "name must be unique" });
-  // }
 
   const person = new Person({ ...body });
   person
     .save()
     .then((savedPerson) => res.json(savedPerson))
     .catch((err) => console.error(err));
+});
+
+app.put("/api/persons/:id", (req, res, next) => {
+  Person.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  })
+    .then((updatedPerson) => res.json(updatedPerson))
+    .catch((err) => next(err));
 });
 
 const unknownEndpoint = (request, response) => {
