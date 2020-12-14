@@ -74,7 +74,18 @@ const App = () => {
             setNotification({ type: "", message: null });
           }, 5000);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setNewName("");
+          setNewNumber("");
+
+          setNotification({
+            type: "error",
+            message: err.message,
+          });
+          setTimeout(() => {
+            setNotification({ type: "", message: null });
+          }, 5000);
+        });
     }
   };
 
