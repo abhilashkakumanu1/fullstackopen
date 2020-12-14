@@ -60,7 +60,7 @@ app.delete("/api/persons/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.post("/api/persons", (req, res) => {
+app.post("/api/persons", (req, res, next) => {
   const body = req.body;
 
   if (!body.name) {
@@ -73,7 +73,7 @@ app.post("/api/persons", (req, res) => {
   person
     .save()
     .then((savedPerson) => res.json(savedPerson))
-    .catch((err) => console.error(err));
+    .catch((err) => next(err));
 });
 
 app.put("/api/persons/:id", (req, res, next) => {
@@ -95,9 +95,12 @@ const errorHandler = (error, request, response, next) => {
   console.error(error.message);
 
   if (error.name === "CastError") {
-    return response.status(400).send({ error: "malformatted id" });
+    return response.status(400).json({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    return response
+      .status(400)
+      .json({ error: "Name already exists in the phonebook" });
   }
-
   next(error);
 };
 
